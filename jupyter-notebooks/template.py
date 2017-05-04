@@ -18,6 +18,72 @@ processed_text = sample_processing(sample_text)
 print processed_text
 
 
+# ## Ekstrakcja hashtagów za pomocą wyrażeń regularnych
+# 
+# Poniższa komórka implementuje funkcję, która tworzy listę hashtagów występujących w tweecie.
+# 
+# https://docs.python.org/2/library/re.html
+
+# In[2]:
+
+import re
+
+def get_hashtags_list(tweet_text):
+    pass
+
+
+# ## Tokenizacja tweetów
+# Poniższa komórka implementuje funkcję, która dzieli tekst tweeta na listę tokenów.
+# 
+# http://www.nltk.org/api/nltk.tokenize.html
+
+# In[4]:
+
+import nltk
+
+# wpisz tutaj swoją funkcję
+
+
+# ## Stemming tokenów
+# Poniższa komórka implementuje funkcję, która bierze jako argument listę tokenów i zwraca listę stemów.
+# 
+# http://www.nltk.org/api/nltk.stem.html<br>
+# http://www.nltk.org/howto/stem.html
+
+# In[ ]:
+
+# wpisz tutaj swoją funkcję
+
+
+# ## Lematyzacja tweetów
+# Poniższa komórka implementuje funkcję, która przyjmuje tekst tweeta jako argument i zwraca jego zlematyzowaną wersję.
+# 
+# http://www.nltk.org/_modules/nltk/stem/wordnet.html
+
+# In[ ]:
+
+# wpisz tutaj swoją funkcję
+
+
+# ## Lematyzacja przy użyciu części zdania (PoS tagging)
+# Poniższa komórka implementuje funkcję, która przyjmuje tekst tweeta jako argument i zwraca listę par (token, część zdania).
+# Następnie kolejna funkcja lematyzuje parę token w oparciu o rozpoznaną część zdania.
+# 
+# http://www.nltk.org/api/nltk.tag.html<br>
+# http://www.nltk.org/book/ch05.html
+
+# In[6]:
+
+# wpisz tutaj swoją funkcję
+
+
+# ## Analiza sentymentalna tweetów
+
+# In[7]:
+
+# wpisz tutaj swoją funkcję
+
+
 # ## Ustawienia kluczy i tokenów dla API Twittera
 # 
 # W poniższej komórce ustawiane są zmienne niezbędne do uzyskania połączenia z API Twittera. Uzupełnij zmienne o swoje wartości kluczy i tokenów
@@ -34,8 +100,10 @@ consumer_secret = "FILL IN WITH YOUR CONSUMER KEY SECRET"
 # 
 # W poniższej komórce implementowana jest klasa służąca do pobierania streamu danych z Twittera. Klasa ta dziedziczy klasę StreamListener pochodzącą z biblioteki tweepy (biblioteki służącej do łączenia się z API Twittera za pomocą Pythona).
 # Implementacja poniższej klasy modyfikuje domyślną metodę on_status(), która uruchamiana jest przy pojawieniu się każdego nowego statusu (tweeta) na Twitterze. 
+# 
+# Funkcja on_status() zapisuje każdego tweeta do bazy danych Elasticsearch.
 
-# In[12]:
+# In[9]:
 
 #Import the necessary methods from tweepy library
 import tweepy
@@ -86,7 +154,7 @@ class StreamProcessingListener(StreamListener):
 # 
 # W poniższej komórce nawiązywane jest połączenie z Twitterem za pomocą danych uwierzytelniających użytkownika a następnie uruchamiany jest 20 sekundowy streaming danych z przykładowym filtrem.
 
-# In[13]:
+# In[10]:
 
 import time
 

@@ -8,21 +8,107 @@
 # 
 # Poniższa komórka implementuje funkcję, która przyjmuje ciąg znaków (zmienną typu STRING) jako argument, modyfikuje ją i zwraca zmodyfikowaną wersję
 
-# In[1]:
+# In[59]:
 
 def sample_processing(text):
-    return text + " #uam #bigdata #postgraduate"
+    return text + ur" #uam #bigdata #postgraduaté"
 
 sample_text = "This is a sample text. It will be modified by sample_processing function."
 processed_text = sample_processing(sample_text)
 print processed_text
 
 
+# ## Ekstrakcja hashtagów za pomocą wyrażeń regularnych
+# 
+# Poniższa komórka implementuje funkcję, która tworzy listę hashtagów występujących w tweecie.
+# 
+# https://docs.python.org/2/library/re.html
+
+# In[60]:
+
+import re
+
+def get_hashtags_list(tweet_text):
+    m = re.findall(ur'#\w+', tweet_text, re.LOCALE)
+    return m
+
+print get_hashtags_list("Some sample tweet with some #hashtag, then some text and then #anotherhashtag again #YOLO")
+
+
+# In[ ]:
+
+
+
+
+# ## Tokenizacja tweetów
+# Poniższa komórka implementuje funkcję, która dzieli tekst tweeta na listę tokenów.
+# 
+# http://www.nltk.org/api/nltk.tokenize.html
+
+# In[61]:
+
+import nltk
+
+# wpisz tutaj swoją funkcję
+
+
+# ## Stemming tokenów
+# Poniższa komórka implementuje funkcję, która bierze jako argument listę tokenów i zwraca listę stemów.
+# 
+# http://www.nltk.org/api/nltk.stem.html<br>
+# http://www.nltk.org/howto/stem.html
+
+# In[62]:
+
+# wpisz tutaj swoją funkcję
+
+
+# ## Lematyzacja tweetów
+# Poniższa komórka implementuje funkcję, która przyjmuje tekst tweeta jako argument i zwraca jego zlematyzowaną wersję.
+# 
+# http://www.nltk.org/_modules/nltk/stem/wordnet.html
+
+# In[63]:
+
+# wpisz tutaj swoją funkcję
+
+
+# ## Lematyzacja przy użyciu części zdania (PoS tagging)
+# Poniższa komórka implementuje funkcję, która przyjmuje tekst tweeta jako argument i zwraca listę par (token, część zdania).
+# Następnie kolejna funkcja lematyzuje parę token w oparciu o rozpoznaną część zdania.
+# 
+# http://www.nltk.org/api/nltk.tag.html<br>
+# http://www.nltk.org/book/ch05.html
+
+# In[64]:
+
+# wpisz tutaj swoją funkcję
+
+
+# ## Analiza sentymentalna tweetów
+
+# In[65]:
+
+# wpisz tutaj swoją funkcję
+
+
+# In[66]:
+
+import re
+
+def get_hashtags_list(tweet_text):
+    m = re.findall(ur'#\w+', tweet_text, re.LOCALE)
+    print m
+    return m
+
+get_hashtags_list("some tweet #hashtag, some sample text #andhashtagagain")
+
+
 # ## Ustawienia kluczy i tokenów dla API Twittera
 # 
 # W poniższej komórce ustawiane są zmienne niezbędne do uzyskania połączenia z API Twittera. Uzupełnij zmienne o swoje wartości kluczy i tokenów
 
-# In[2]:
+# In[67]:
 
 access_token = "2362404584-MJuLY5ISJq3CFxyDTVhuhI6rRjygCDxd9QYEzWg"
 access_token_secret = "pGD3PyMuz5M6YxzCkAryaytkPD0Eb2lF8q2aI9mNgg07o"
@@ -34,8 +120,10 @@ consumer_secret = "Odsld4Q5fAB9mk9VSJQUPYGDWcepOOUEZZk08Ya9CIR54szd4k"
 # 
 # W poniższej komórce implementowana jest klasa służąca do pobierania streamu danych z Twittera. Klasa ta dziedziczy klasę StreamListener pochodzącą z biblioteki tweepy (biblioteki służącej do łączenia się z API Twittera za pomocą Pythona).
 # Implementacja poniższej klasy modyfikuje domyślną metodę on_status(), która uruchamiana jest przy pojawieniu się każdego nowego statusu (tweeta) na Twitterze. 
+# 
+# Funkcja on_status() zapisuje każdego tweeta do bazy danych Elasticsearch.
 
-# In[9]:
+# In[68]:
 
 #Import the necessary methods from tweepy library
 import tweepy
@@ -64,6 +152,7 @@ class StreamProcessingListener(StreamListener):
         bg_color = status.user.profile_background_color
         
         processed_text = sample_processing(text)
+        hashtags_list = get_hashtags_list(processed_text)
         
         es.index(index="twitter",
              doc_type="tweet",
@@ -79,7 +168,8 @@ class StreamProcessingListener(StreamListener):
                 "id_str": id_str,
                 "retweets": retweets,
                 "bg_color": bg_color,
-                "processed_text": processed_text})
+                "processed_text": processed_text,
+                "hashtags_list": hashtags_list})
         
         print text
         
@@ -93,7 +183,7 @@ class StreamProcessingListener(StreamListener):
 # 
 # W poniższej komórce nawiązywane jest połączenie z Twitterem za pomocą danych uwierzytelniających użytkownika a następnie uruchamiany jest 20 sekundowy streaming danych z przykładowym filtrem.
 
-# In[10]:
+# In[69]:
 
 import time
 
