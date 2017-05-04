@@ -59,7 +59,20 @@ class StreamProcessingListener(StreamListener):
         retweets = status.retweet_count
         bg_color = status.user.profile_background_color
         
-        processed_text = sample_processing(text)
+        es.index(index="twitter",
+             doc_type="tweet",
+             body={
+                "created_at": created_at,
+                "text": text,
+                "user_description": user_description,
+                "user_location": user_location,
+                "coords": coords,
+                "user_name": user_name,
+                "user_created": user_created,
+                "followers": followers,
+                "id_str": id_str,
+                "retweets": retweets,
+                "bg_color": bg_color})
         
         print text
         
