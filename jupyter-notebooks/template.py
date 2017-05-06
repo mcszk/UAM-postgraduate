@@ -4,11 +4,13 @@
 # # Przetwarzanie tekstu na przykładzie strumienia danych z Twittera
 # 
 
-# ## Przykładowe przetwarzanie tekstu
+# ## 1. Przetwarzanie tekstu (NLP)
+
+# ### 1.1 Przykładowe przetwarzanie tekstu
 # 
 # Poniższa komórka implementuje funkcję, która przyjmuje ciąg znaków (zmienną typu STRING) jako argument, modyfikuje ją i zwraca zmodyfikowaną wersję
 
-# In[10]:
+# In[3]:
 
 def sample_processing(text):
     pass
@@ -18,13 +20,13 @@ processed_text = sample_processing(sample_text)
 print processed_text
 
 
-# ## Ekstrakcja hashtagów za pomocą wyrażeń regularnych
+# ### 1.2 Ekstrakcja hashtagów za pomocą wyrażeń regularnych
 # 
 # Poniższa komórka implementuje funkcję, która tworzy listę hashtagów występujących w tweecie.
 # 
 # https://docs.python.org/2/library/re.html
 
-# In[2]:
+# In[4]:
 
 import re
 
@@ -32,63 +34,103 @@ def get_hashtags_list(tweet_text):
     pass
 
 
-# ## Tokenizacja tweetów
+# ### 1.3 Tokenizacja tweetów
 # Poniższa komórka implementuje funkcję, która dzieli tekst tweeta na listę tokenów.
 # 
 # http://www.nltk.org/api/nltk.tokenize.html
 
-# In[4]:
+# In[5]:
 
 import nltk
 
 # wpisz tutaj swoją funkcję
 
 
-# ## Stemming tokenów
+# ### 1.4 Stemming tokenów
 # Poniższa komórka implementuje funkcję, która bierze jako argument listę tokenów i zwraca listę stemów.
 # 
 # http://www.nltk.org/api/nltk.stem.html<br>
 # http://www.nltk.org/howto/stem.html
-
-# In[ ]:
-
-# wpisz tutaj swoją funkcję
-
-
-# ## Lematyzacja tweetów
-# Poniższa komórka implementuje funkcję, która przyjmuje tekst tweeta jako argument i zwraca jego zlematyzowaną wersję.
-# 
-# http://www.nltk.org/_modules/nltk/stem/wordnet.html
-
-# In[ ]:
-
-# wpisz tutaj swoją funkcję
-
-
-# ## Lematyzacja przy użyciu części zdania (PoS tagging)
-# Poniższa komórka implementuje funkcję, która przyjmuje tekst tweeta jako argument i zwraca listę par (token, część zdania).
-# Następnie kolejna funkcja lematyzuje parę token w oparciu o rozpoznaną część zdania.
-# 
-# http://www.nltk.org/api/nltk.tag.html<br>
-# http://www.nltk.org/book/ch05.html
 
 # In[6]:
 
 # wpisz tutaj swoją funkcję
 
 
-# ## Analiza sentymentalna tweetów
+# ### 1.5 Lematyzacja tweetów
+# Poniższa komórka implementuje funkcję, która przyjmuje tekst tweeta jako argument i zwraca jego zlematyzowaną wersję.
+# 
+# http://www.nltk.org/_modules/nltk/stem/wordnet.html
 
 # In[7]:
 
 # wpisz tutaj swoją funkcję
 
 
-# ## Ustawienia kluczy i tokenów dla API Twittera
+# ### 1.6 Lematyzacja przy użyciu części zdania (PoS tagging)
+# Poniższa komórka implementuje funkcję, która przyjmuje tekst tweeta jako argument i zwraca listę par (token, część zdania).
+# Następnie kolejna funkcja lematyzuje parę token w oparciu o rozpoznaną część zdania.
+# 
+# http://www.nltk.org/api/nltk.tag.html<br>
+# http://www.nltk.org/book/ch05.html
+
+# In[8]:
+
+# wpisz tutaj swoją funkcję
+
+
+# ### 1.7 Filtrowanie tokenów nie zawierających słów
+# 
+# Poniższa komórka implementuje funkcję, która filtruje z listy tokenów tokeny nie zawierające żadnego znaku alfanumerycznego.
+
+# In[9]:
+
+# wpisz tutaj swoją funkcję
+
+
+# ### 1.8 Filtrowanie słów o małym znaczeniu 
+# 
+# Filtrowanie słów o małym znaczeniu odbywa się przy wykorzystaniu stop-list (ang. stopwords). Poniższa komórka wczytuje zapisaną na dysku listę z pliku tekstowego oraz implementuje funkcję, która w oparciu o tę listę filtruje słowa o małym znaczeniu.
+
+# In[10]:
+
+clear_regex = re.compile(ur'\w')
+
+def filter_tokens(token_list):
+    filtered_tokens = []
+    for token in token_list:
+        if clear_regex.search(token):
+            filtered_tokens.append(token)
+    
+    return filtered_tokens
+
+lemma_tokens = [u'i', u'be', u'meeting', u'you', u'tomorrow', u'.', u'where', u'do', u'we', u'have', u'our', u'meeting', u'?', u'some', u'sample', u'tweet', u'with', u'some', u'#hashtag', u',', u'then', u'some', u'text', u'and', u'then', u'#anotherhashtag', u'again', u'#yolo', u'.', u'you', u"aren't", u'a', u'bad', u'pyprogrammer']
+print filter_tokens(lemma_tokens)
+
+
+# ### 1.9 Analiza sentymentalna tweetów
+
+# In[16]:
+
+# wpisz tutaj swoją funkcję
+
+
+# ### 1.10 Rozpoznawanie encji (ang. Named entity recognition)
+# Rozpoznawanie encji polega na indentyfikacji w zdaniach tokenów posiadających szczególne znaczenie. Typowe encje, które rozpoznaje się w tym procesie to: Osoba, Miejsce, Organizacja, Czas.
+# Poniższa komórka implementuje metodę, która zwraca listy osób, miejsc i organizacji w danym tweecie.
+
+# In[12]:
+
+# wpisz tutaj swoją funkcję
+
+
+# ## 2. Streaming danych z Twittera
+
+# ### 2.1 Ustawienia kluczy i tokenów dla API Twittera
 # 
 # W poniższej komórce ustawiane są zmienne niezbędne do uzyskania połączenia z API Twittera. Uzupełnij zmienne o swoje wartości kluczy i tokenów
 
-# In[11]:
+# In[13]:
 
 access_token = "FILL IN WITH YOUR ACCESS TOKEN"
 access_token_secret = "FILL IN WITH YOUR ACCESS TOKEN SECRET"
@@ -96,14 +138,14 @@ consumer_key = "FILL IN WITH YOUR CONSUMER KEY"
 consumer_secret = "FILL IN WITH YOUR CONSUMER KEY SECRET"
 
 
-# ## Implementacja klasy służącej do Streamingu danych z Twittera
+# ### 2.2 Implementacja klasy służącej do Streamingu danych z Twittera
 # 
 # W poniższej komórce implementowana jest klasa służąca do pobierania streamu danych z Twittera. Klasa ta dziedziczy klasę StreamListener pochodzącą z biblioteki tweepy (biblioteki służącej do łączenia się z API Twittera za pomocą Pythona).
 # Implementacja poniższej klasy modyfikuje domyślną metodę on_status(), która uruchamiana jest przy pojawieniu się każdego nowego statusu (tweeta) na Twitterze. 
 # 
 # Funkcja on_status() zapisuje każdego tweeta do bazy danych Elasticsearch.
 
-# In[9]:
+# In[14]:
 
 #Import the necessary methods from tweepy library
 import tweepy
@@ -150,11 +192,11 @@ class StreamProcessingListener(StreamListener):
         print(status)
 
 
-# ## Nawiązanie połączenia z API Twittera i uruchomienie stremingu
+# ### 2.3 Nawiązanie połączenia z API Twittera i uruchomienie stremingu
 # 
 # W poniższej komórce nawiązywane jest połączenie z Twitterem za pomocą danych uwierzytelniających użytkownika a następnie uruchamiany jest 20 sekundowy streaming danych z przykładowym filtrem.
 
-# In[10]:
+# In[15]:
 
 import time
 
