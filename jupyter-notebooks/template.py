@@ -34,6 +34,14 @@ def get_hashtags_list(tweet_text):
     pass
 
 
+# ### 1.3 Czyszczenie tweetów za pomocą wyrażeń regularnych
+# Poniższa komórka implementuje funkcję, która za pomocą wyrażeń regularnych czyści tweety z linków, nazw użytkowników, itp.
+
+# In[ ]:
+
+# wpisz tutaj swoją funkcję
+
+
 # ### 1.3 Tokenizacja tweetów
 # Poniższa komórka implementuje funkcję, która dzieli tekst tweeta na listę tokenów.
 # 
@@ -109,6 +117,10 @@ print filter_tokens(lemma_tokens)
 
 
 # ### 1.9 Analiza sentymentalna tweetów
+# Analiza sentymentalna polega na rozpoznaniu emocji występujących w tekście. Poniższa komórka implementuje metodę obliczającą pewną miarę liczbową sentymentu.
+# 
+# https://github.com/cjhutto/vaderSentiment<br>
+# http://www.nltk.org/_modules/nltk/sentiment/vader.html
 
 # In[16]:
 
